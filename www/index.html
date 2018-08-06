@@ -20,23 +20,5 @@
 
   <app-root></app-root>
 
-<script data-build="2018-07-06T04:53:15">
-    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
-          .then(function(reg) {
-            reg.onupdatefound = function() {
-              var installingWorker = reg.installing;
-              installingWorker.onstatechange = function() {
-                if (installingWorker.state === 'installed') {
-                  window.dispatchEvent(new Event('swUpdate'))
-                }
-              }
-            }
-          })
-          .catch(function(err) { console.error('service worker error', err) });
-      });
-    }
-</script>
 </body>
 </html>

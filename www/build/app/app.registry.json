@@ -8,7 +8,7 @@
   "components": {
     "app-root": {
       "bundleIds": {
-        "$": "gj0vaoek"
+        "$": "9qpxfti7"
       }
     },
     "async-content": {
@@ -31,7 +31,7 @@
     },
     "example-basic": {
       "bundleIds": {
-        "$": "gj0vaoek"
+        "$": "9qpxfti7"
       }
     }
   }

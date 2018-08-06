@@ -9,7 +9,7 @@ export class ExampleBasic {
     render() {
         return (
           <div>
-            <async-content src="docs/hello-world.html">
+            <async-content src="www/docs/hello-world.html">
               <async-placeholder>
                 <pre> Loading... </pre>
               </async-placeholder>
