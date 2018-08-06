@@ -1,0 +1,38 @@
+{
+  "namespace": "App",
+  "fsNamespace": "app",
+  "loader": "../app.js",
+  "global": "app.global.js",
+  "core": "app.lk58ggrf.js",
+  "corePolyfilled": "app.jjjel0pb.js",
+  "components": {
+    "app-root": {
+      "bundleIds": {
+        "$": "gj0vaoek"
+      }
+    },
+    "async-content": {
+      "bundleIds": {
+        "$": "mhwjejms"
+      },
+      "encapsulation": "shadow"
+    },
+    "async-error": {
+      "bundleIds": {
+        "$": "mhwjejms"
+      },
+      "encapsulation": "shadow"
+    },
+    "async-placeholder": {
+      "bundleIds": {
+        "$": "mhwjejms"
+      },
+      "encapsulation": "shadow"
+    },
+    "example-basic": {
+      "bundleIds": {
+        "$": "gj0vaoek"
+      }
+    }
+  }
+}
