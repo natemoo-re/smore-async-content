@@ -2,30 +2,47 @@
 
 # @smore/async-content
 
-Utility web components for asynchronously rendering HTML content.
+Web components for asynchronously rendering HTML content.
+Use them with [any framework](https://stenciljs.com/docs/framework-integration), or no framework at all!
 
-## Example
-```jsx
-<async-content src="assets/docs-content/hello-world.html">
-  <async-placeholder component="my-spinner"/>
-  <async-error errorRender={({ message }) => <div> { message } </div> }/>
+## Usage
+
+Minimal example
+```tsx
+<async-content src="docs/hello-world.html">
+  <async-placeholder> <pre> Loading... </pre> </async-placeholder>
+  <async-error> <pre> An error occured! </pre> </async-error>
 </async-content>
 ```
 
-## Components
-`<async-content>` automatically fetches HTML content for you. It also handles rendering child components like `<async-placeholder>` and `<async-error>`
+Better Placeholder/Error rendering
+```tsx
+<async-content src="docs/hello-world.html">
+  <async-placeholder component="my-spinner" />
+  <async-error errorRender={({ status, message }) => {
+    return [
+      <h1> Oops, { status } Error</h1>
+      <p> { message } </p>
+    ]
+  }} />
+</async-content>
+```
 
+## Documentation
+[`<async-content>`](./src/component/async-content/readme.md)
+[`<async-placeholder>`](./src/component/async-placeholder/readme.md)
+[`<async-error>`](./src/component/async-error/readme.md)
 
 
 ## Installation
 
 ### Script tag
-- Put a script tag similar to this `<script src='https://unpkg.com/@smore/async-content@0.0.1/dist/smore-async-content.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/@smore/async-content@0.2.0/dist/async-content.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
 - Run `npm install @smore/async-content --save`
-- Put a script tag similar to this `<script src='node_modules/@smore/async-content/dist/smore-async-content.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='node_modules/@smore/async-content/dist/async-content.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### In a stencil-starter app

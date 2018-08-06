@@ -1,7 +1,6 @@
 {
   "name": "@smore/async-content",
-  "private": false,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Utility web components for asynchronously rendering HTML content",
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
@@ -12,6 +11,7 @@
   ],
   "scripts": {
     "build": "stencil build",
+    "build:docs": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "jest",
     "test.watch": "jest --watch"

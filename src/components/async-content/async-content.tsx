@@ -10,6 +10,13 @@ export class AsyncContent {
   @Element() element: HTMLElement;
   private placeholderElement: HTMLAsyncPlaceholderElement;
   private errorElement: HTMLAsyncErrorElement;
+
+  /**
+   * The path to the HTML content to be fetched
+   *
+   * @type {string}
+   * @memberof AsyncContent
+   */
   @Prop() src: string = '';
 
   @State() hasError: boolean = false;
@@ -23,37 +30,45 @@ export class AsyncContent {
   componentDidLoad() {
     this.placeholderElement = this.element.querySelector('async-placeholder');
     this.errorElement = this.element.querySelector('async-error');
-    console.log(this.placeholderElement, this.errorElement);
   }
 
   @Watch('src')
   fetchNewContent() {
-    fetch(this.src)
-      .then(response => {
-        if (response.status >= 200 && response.status < 300) {
-          return response;
-        } else {
-          const error = new Error(response.statusText);
-          error.name = `${response.status}`;
-          throw error;
-        }
-      })
-      .then(response => response.text())
-      .then(response => {
-        this.content = response;
-        if (this.placeholderElement) {
-          this.placeholderElement.cancel();
-        }
-        if (this.errorElement) {
-          this.errorElement.cancel();
-        }
-      })
-      .catch((err) => {
-        this.hasError = true;
-        if (this.errorElement) {
-          this.errorElement.setStatus(err.name, err.message);
-        }
-      });
+    let src = this.src;
+    src = src.trim();
+    if (src.endsWith('html')) {
+      fetch(this.src)
+        .then(response => {
+          if (response.status >= 200 && response.status < 300) {
+            return response;
+          } else {
+            const error = new Error(response.statusText);
+            error.name = `${response.status}`;
+            throw error;
+          }
+        })
+        .then(response => response.text())
+        .then(response => {
+          this.content = response;
+          if (this.placeholderElement) {
+            this.placeholderElement.cancel();
+          }
+          if (this.errorElement) {
+            this.errorElement.cancel();
+          }
+        })
+        .catch((err) => {
+          this.hasError = true;
+          if (this.errorElement) {
+            this.errorElement.setStatus(err.name, err.message);
+          }
+        });
+    } else {
+      this.hasError = true;
+      if (this.errorElement) {
+        this.errorElement.setStatus(415, 'Refusing to fetch non-HTML content');
+      }
+    }
   }
 
   @Listen('hasPlaceholder')

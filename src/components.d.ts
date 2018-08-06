@@ -30,6 +30,9 @@ declare global {
 
   namespace StencilComponents {
     interface AsyncContent {
+      /**
+       * The path to the HTML content to be fetched
+       */
       'src': string;
     }
   }
@@ -53,6 +56,9 @@ declare global {
   }
   namespace JSXElements {
     export interface AsyncContentAttributes extends HTMLAttributes {
+      /**
+       * The path to the HTML content to be fetched
+       */
       'src'?: string;
     }
   }
@@ -63,9 +69,21 @@ declare global {
 
   namespace StencilComponents {
     interface AsyncError {
+      /**
+       * Clears the internal timer that determines when `<async-content />` should timeout. Called automatically as necessary by `<async-content />`
+       */
       'cancel': () => void;
-      'errorRender': (args: {status?: number, message?: string}) => JSX.Element;
+      /**
+       * An optional function that should render when `<async-content>` encounters an error. The function is passed an object with `{ status, message }` in case you'd like either of those to be rendered.
+       */
+      'errorRender': (args: { status?: number, message?: string }) => JSX.Element;
+      /**
+       * A delay (in milliseconds) until the `<async-content>` fetch should be assumed to have timed out. Defaults to `10000`.
+       */
       'ms': number;
+      /**
+       * Sets the Error status and message as passed to `errorRender` Called automatically by `<async-content />`
+       */
       'setStatus': (status: number, message?: string) => void;
     }
   }
@@ -89,8 +107,17 @@ declare global {
   }
   namespace JSXElements {
     export interface AsyncErrorAttributes extends HTMLAttributes {
-      'errorRender'?: (args: {status?: number, message?: string}) => JSX.Element;
+      /**
+       * An optional function that should render when `<async-content>` encounters an error. The function is passed an object with `{ status, message }` in case you'd like either of those to be rendered.
+       */
+      'errorRender'?: (args: { status?: number, message?: string }) => JSX.Element;
+      /**
+       * A delay (in milliseconds) until the `<async-content>` fetch should be assumed to have timed out. Defaults to `10000`.
+       */
       'ms'?: number;
+      /**
+       * Emitted once `this.ms` has passed and the `<async-content>` fetch should be assumed to have timed out
+       */
       'onHasError'?: (event: CustomEvent<void>) => void;
     }
   }
@@ -101,9 +128,21 @@ declare global {
 
   namespace StencilComponents {
     interface AsyncPlaceholder {
+      /**
+       * Clears the internal timer that determines when to display the placeholder. Called automatically as necessary by `<async-content/>`
+       */
       'cancel': () => void;
+      /**
+       * An HTML tag that should be rendered as a placeholder.
+       */
       'component': string;
+      /**
+       * Optionally, allows you to pass props to the placeholder component.
+       */
       'componentProps': { [key: string]: any };
+      /**
+       * A delay (in milliseconds) until the placeholder should be shown. Defaults to `600`.
+       */
       'ms': number;
     }
   }
@@ -127,9 +166,21 @@ declare global {
   }
   namespace JSXElements {
     export interface AsyncPlaceholderAttributes extends HTMLAttributes {
+      /**
+       * An HTML tag that should be rendered as a placeholder.
+       */
       'component'?: string;
+      /**
+       * Optionally, allows you to pass props to the placeholder component.
+       */
       'componentProps'?: { [key: string]: any };
+      /**
+       * A delay (in milliseconds) until the placeholder should be shown. Defaults to `600`.
+       */
       'ms'?: number;
+      /**
+       * Emitted once `this.ms` has passed and the placeholder should be displayed
+       */
       'onHasPlaceholder'?: (event: CustomEvent<void>) => void;
     }
   }
