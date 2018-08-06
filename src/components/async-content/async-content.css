@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+:host(.is-loading) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
